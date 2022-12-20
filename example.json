@@ -1,0 +1,679 @@
+{
+  "pipelineRun": {
+    "kind": "PipelineRun",
+    "apiVersion": "tekton.dev/v1beta1",
+    "metadata": {
+      "name": "hello-kaniko-pipeline-run-kxzpf",
+      "generateName": "hello-kaniko-pipeline-run-",
+      "namespace": "ci",
+      "uid": "a255250a-2b9a-498b-8af4-39ee84030412",
+      "resourceVersion": "24869514",
+      "generation": 1,
+      "creationTimestamp": "2022-12-20T13:06:21Z",
+      "labels": {
+        "tekton.dev/pipeline": "hello-kaniko-pipeline"
+      },
+      "annotations": {
+        "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"tekton.dev/v1beta1\",\"kind\":\"Pipeline\",\"metadata\":{\"annotations\":{},\"name\":\"hello-kaniko-pipeline\",\"namespace\":\"ci\"},\"spec\":{\"finally\":[{\"name\":\"send-to-telegram\",\"params\":[{\"name\":\"bot-token-secret\",\"value\":\"telegram-bot-secret\"},{\"name\":\"message\",\"value\":\"$(context.pipeline.name): $(tasks.status)\"},{\"name\":\"chat-id\",\"value\":5884662812}],\"taskRef\":{\"name\":\"send-to-telegram\"}}],\"params\":[{\"name\":\"git_revision\"}],\"tasks\":[{\"name\":\"fetch-from-git\",\"params\":[{\"name\":\"url\",\"value\":\"https://github.com/WLun001/cncf-demo\"},{\"name\":\"revision\",\"value\":\"$(params.git_revision)\"}],\"taskRef\":{\"name\":\"git-clone\"},\"workspaces\":[{\"name\":\"output\",\"workspace\":\"git-source\"}]},{\"name\":\"build-image\",\"params\":[{\"name\":\"IMAGE\",\"value\":\"ghcr.io/wlun001/hello-world\"},{\"name\":\"CONTEXT\",\"value\":\"examples/hello-world\"},{\"name\":\"DOCKERFILE\",\"value\":\"$(workspaces.source.path)/examples/hello-world/Dockerfile\"},{\"name\":\"EXTRA_ARGS\",\"value\":[\"--no-push\"]}],\"runAfter\":[\"fetch-from-git\"],\"taskRef\":{\"name\":\"kaniko\"},\"workspaces\":[{\"name\":\"source\",\"workspace\":\"git-source\"}]}],\"workspaces\":[{\"name\":\"git-source\"}]}}\n"
+      },
+      "managedFields": [
+        {
+          "manager": "kubectl-create",
+          "operation": "Update",
+          "apiVersion": "tekton.dev/v1beta1",
+          "time": "2022-12-20T13:06:21Z",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:metadata": {
+              "f:generateName": {}
+            },
+            "f:spec": {
+              ".": {},
+              "f:params": {},
+              "f:pipelineRef": {
+                ".": {},
+                "f:name": {}
+              },
+              "f:workspaces": {}
+            }
+          }
+        },
+        {
+          "manager": "controller",
+          "operation": "Update",
+          "apiVersion": "tekton.dev/v1beta1",
+          "time": "2022-12-20T13:06:22Z",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:metadata": {
+              "f:annotations": {
+                ".": {},
+                "f:kubectl.kubernetes.io/last-applied-configuration": {}
+              },
+              "f:labels": {
+                ".": {},
+                "f:tekton.dev/pipeline": {}
+              }
+            }
+          }
+        },
+        {
+          "manager": "controller",
+          "operation": "Update",
+          "apiVersion": "tekton.dev/v1beta1",
+          "time": "2022-12-20T13:06:42Z",
+          "fieldsType": "FieldsV1",
+          "fieldsV1": {
+            "f:status": {
+              ".": {},
+              "f:conditions": {},
+              "f:pipelineSpec": {
+                ".": {},
+                "f:finally": {},
+                "f:params": {},
+                "f:tasks": {},
+                "f:workspaces": {}
+              },
+              "f:startTime": {},
+              "f:taskRuns": {
+                ".": {},
+                "f:hello-kaniko-pipeline-run-kxzpf-build-image": {
+                  ".": {},
+                  "f:pipelineTaskName": {},
+                  "f:status": {
+                    ".": {},
+                    "f:conditions": {},
+                    "f:podName": {},
+                    "f:startTime": {},
+                    "f:steps": {},
+                    "f:taskSpec": {
+                      ".": {},
+                      "f:description": {},
+                      "f:params": {},
+                      "f:results": {},
+                      "f:steps": {},
+                      "f:workspaces": {}
+                    }
+                  }
+                },
+                "f:hello-kaniko-pipeline-run-kxzpf-fetch-from-git": {
+                  ".": {},
+                  "f:pipelineTaskName": {},
+                  "f:status": {
+                    ".": {},
+                    "f:completionTime": {},
+                    "f:conditions": {},
+                    "f:podName": {},
+                    "f:startTime": {},
+                    "f:steps": {},
+                    "f:taskResults": {},
+                    "f:taskSpec": {
+                      ".": {},
+                      "f:description": {},
+                      "f:params": {},
+                      "f:results": {},
+                      "f:steps": {},
+                      "f:workspaces": {}
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "subresource": "status"
+        }
+      ]
+    },
+    "spec": {
+      "pipelineRef": {
+        "name": "hello-kaniko-pipeline"
+      },
+      "params": [
+        {
+          "name": "git_revision",
+          "value": "HEAD"
+        }
+      ],
+      "serviceAccountName": "default",
+      "timeout": "1h0m0s",
+      "workspaces": [
+        {
+          "name": "git-source",
+          "persistentVolumeClaim": {
+            "claimName": "tekton-ci-pvc"
+          }
+        }
+      ]
+    },
+    "status": {
+      "conditions": [
+        {
+          "type": "Succeeded",
+          "status": "Unknown",
+          "lastTransitionTime": "2022-12-20T13:09:53Z",
+          "reason": "Running",
+          "message": "Tasks Completed: 2 (Failed: 0, Cancelled 0), Incomplete: 1, Skipped: 0"
+        }
+      ],
+      "startTime": "2022-12-20T13:06:22Z",
+      "taskRuns": {
+        "hello-kaniko-pipeline-run-kxzpf-build-image": {
+          "pipelineTaskName": "build-image",
+          "status": {
+            "conditions": [
+              {
+                "type": "Succeeded",
+                "status": "True",
+                "lastTransitionTime": "2022-12-20T13:09:53Z",
+                "reason": "Succeeded",
+                "message": "All Steps have completed executing"
+              }
+            ],
+            "podName": "hello-kaniko-pipeline-run-kxzpf-build-image-pod",
+            "startTime": "2022-12-20T13:06:35Z",
+            "completionTime": "2022-12-20T13:09:53Z",
+            "steps": [
+              {
+                "terminated": {
+                  "exitCode": 0,
+                  "reason": "Completed",
+                  "message": "[{\"key\":\"IMAGE_DIGEST\",\"value\":\"sha256:0fa63ac4492337492018976b58248d99ca87be186aea02856eae898e591da1e4\",\"type\":1}]",
+                  "startedAt": "2022-12-20T13:06:43Z",
+                  "finishedAt": "2022-12-20T13:08:56Z",
+                  "containerID": "containerd://f5f937fcdc986d019502ebd5bba49e4bc59c1435d2ad3cbef0c2549032e32102"
+                },
+                "name": "build-and-push",
+                "container": "step-build-and-push",
+                "imageID": "gcr.io/kaniko-project/executor@sha256:c6166717f7fe0b7da44908c986137ecfeab21f31ec3992f6e128fff8a94be8a5"
+              },
+              {
+                "terminated": {
+                  "exitCode": 0,
+                  "reason": "Completed",
+                  "message": "[{\"key\":\"IMAGE_DIGEST\",\"value\":\"sha256:0fa63ac4492337492018976b58248d99ca87be186aea02856eae898e591da1e4\",\"type\":1},{\"key\":\"IMAGE_URL\",\"value\":\"ghcr.io/wlun001/hello-world\",\"type\":1}]",
+                  "startedAt": "2022-12-20T13:08:56Z",
+                  "finishedAt": "2022-12-20T13:08:56Z",
+                  "containerID": "containerd://cfea84720735637e393d853034b4e76ac14625221f06a04afc7c6cbbe85c0197"
+                },
+                "name": "write-url",
+                "container": "step-write-url",
+                "imageID": "docker.io/library/bash@sha256:c523c636b722339f41b6a431b44588ab2f762c5de5ec3bd7964420ff982fb1d9"
+              }
+            ],
+            "taskResults": [
+              {
+                "name": "IMAGE_DIGEST",
+                "type": "string",
+                "value": "sha256:0fa63ac4492337492018976b58248d99ca87be186aea02856eae898e591da1e4"
+              },
+              {
+                "name": "IMAGE_URL",
+                "type": "string",
+                "value": "ghcr.io/wlun001/hello-world"
+              }
+            ],
+            "taskSpec": {
+              "params": [
+                {
+                  "name": "IMAGE",
+                  "type": "string",
+                  "description": "Name (reference) of the image to build."
+                },
+                {
+                  "name": "DOCKERFILE",
+                  "type": "string",
+                  "description": "Path to the Dockerfile to build.",
+                  "default": "./Dockerfile"
+                },
+                {
+                  "name": "CONTEXT",
+                  "type": "string",
+                  "description": "The build context used by Kaniko.",
+                  "default": "./"
+                },
+                {
+                  "name": "EXTRA_ARGS",
+                  "type": "array",
+                  "default": []
+                },
+                {
+                  "name": "BUILDER_IMAGE",
+                  "type": "string",
+                  "description": "The image on which builds will run (default is v1.5.1)",
+                  "default": "gcr.io/kaniko-project/executor:v1.5.1@sha256:c6166717f7fe0b7da44908c986137ecfeab21f31ec3992f6e128fff8a94be8a5"
+                }
+              ],
+              "description": "This Task builds a simple Dockerfile with kaniko and pushes to a registry. This Task stores the image name and digest as results, allowing Tekton Chains to pick up that an image was built \u0026 sign it.",
+              "steps": [
+                {
+                  "name": "build-and-push",
+                  "image": "gcr.io/kaniko-project/executor:v1.5.1@sha256:c6166717f7fe0b7da44908c986137ecfeab21f31ec3992f6e128fff8a94be8a5",
+                  "args": [
+                    "--no-push",
+                    "--dockerfile=/workspace/source/examples/hello-world/Dockerfile",
+                    "--context=/workspace/source/examples/hello-world",
+                    "--destination=ghcr.io/wlun001/hello-world",
+                    "--digest-file=/tekton/results/IMAGE_DIGEST"
+                  ],
+                  "workingDir": "/workspace/source",
+                  "resources": {},
+                  "securityContext": {
+                    "runAsUser": 0
+                  }
+                },
+                {
+                  "name": "write-url",
+                  "image": "docker.io/library/bash:5.1.4@sha256:c523c636b722339f41b6a431b44588ab2f762c5de5ec3bd7964420ff982fb1d9",
+                  "resources": {},
+                  "script": "set -e\nimage=\"ghcr.io/wlun001/hello-world\"\necho -n \"${image}\" | tee \"/tekton/results/IMAGE_URL\"\n"
+                }
+              ],
+              "workspaces": [
+                {
+                  "name": "source",
+                  "description": "Holds the context and Dockerfile"
+                },
+                {
+                  "name": "dockerconfig",
+                  "description": "Includes a docker `config.json`",
+                  "mountPath": "/kaniko/.docker",
+                  "optional": true
+                }
+              ],
+              "results": [
+                {
+                  "name": "IMAGE_DIGEST",
+                  "type": "string",
+                  "description": "Digest of the image just built."
+                },
+                {
+                  "name": "IMAGE_URL",
+                  "type": "string",
+                  "description": "URL of the image just built."
+                }
+              ]
+            }
+          }
+        },
+        "hello-kaniko-pipeline-run-kxzpf-fetch-from-git": {
+          "pipelineTaskName": "fetch-from-git",
+          "status": {
+            "conditions": [
+              {
+                "type": "Succeeded",
+                "status": "True",
+                "lastTransitionTime": "2022-12-20T13:06:35Z",
+                "reason": "Succeeded",
+                "message": "All Steps have completed executing"
+              }
+            ],
+            "podName": "hello-kaniko-pipeline-run-kxzpf-fetch-from-git-pod",
+            "startTime": "2022-12-20T13:06:23Z",
+            "completionTime": "2022-12-20T13:06:35Z",
+            "steps": [
+              {
+                "terminated": {
+                  "exitCode": 0,
+                  "reason": "Completed",
+                  "message": "[{\"key\":\"commit\",\"value\":\"c01b0010ac4a8be9ad3c3393d48cc8c240849192\",\"type\":1},{\"key\":\"url\",\"value\":\"https://github.com/WLun001/cncf-demo\",\"type\":1}]",
+                  "startedAt": "2022-12-20T13:06:32Z",
+                  "finishedAt": "2022-12-20T13:06:34Z",
+                  "containerID": "containerd://f6f4f28b62501fa14a7af3ea512363e092bfa21da319b769e9826490a344a6d3"
+                },
+                "name": "clone",
+                "container": "step-clone",
+                "imageID": "gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init@sha256:28ff94e63e4058afc3f15b4c11c08cf3b54fa91faa646a4bbac90380cd7158df"
+              }
+            ],
+            "taskResults": [
+              {
+                "name": "commit",
+                "type": "string",
+                "value": "c01b0010ac4a8be9ad3c3393d48cc8c240849192"
+              },
+              {
+                "name": "url",
+                "type": "string",
+                "value": "https://github.com/WLun001/cncf-demo"
+              }
+            ],
+            "taskSpec": {
+              "params": [
+                {
+                  "name": "url",
+                  "type": "string",
+                  "description": "Repository URL to clone from."
+                },
+                {
+                  "name": "revision",
+                  "type": "string",
+                  "description": "Revision to checkout. (branch, tag, sha, ref, etc...)",
+                  "default": ""
+                },
+                {
+                  "name": "refspec",
+                  "type": "string",
+                  "description": "Refspec to fetch before checking out revision.",
+                  "default": ""
+                },
+                {
+                  "name": "submodules",
+                  "type": "string",
+                  "description": "Initialize and fetch git submodules.",
+                  "default": "true"
+                },
+                {
+                  "name": "depth",
+                  "type": "string",
+                  "description": "Perform a shallow clone, fetching only the most recent N commits.",
+                  "default": "1"
+                },
+                {
+                  "name": "sslVerify",
+                  "type": "string",
+                  "description": "Set the `http.sslVerify` global git config. Setting this to `false` is not advised unless you are sure that you trust your git remote.",
+                  "default": "true"
+                },
+                {
+                  "name": "crtFileName",
+                  "type": "string",
+                  "description": "file name of mounted crt using ssl-ca-directory workspace. default value is ca-bundle.crt.",
+                  "default": "ca-bundle.crt"
+                },
+                {
+                  "name": "subdirectory",
+                  "type": "string",
+                  "description": "Subdirectory inside the `output` Workspace to clone the repo into.",
+                  "default": ""
+                },
+                {
+                  "name": "sparseCheckoutDirectories",
+                  "type": "string",
+                  "description": "Define the directory patterns to match or exclude when performing a sparse checkout.",
+                  "default": ""
+                },
+                {
+                  "name": "deleteExisting",
+                  "type": "string",
+                  "description": "Clean out the contents of the destination directory if it already exists before cloning.",
+                  "default": "true"
+                },
+                {
+                  "name": "httpProxy",
+                  "type": "string",
+                  "description": "HTTP proxy server for non-SSL requests.",
+                  "default": ""
+                },
+                {
+                  "name": "httpsProxy",
+                  "type": "string",
+                  "description": "HTTPS proxy server for SSL requests.",
+                  "default": ""
+                },
+                {
+                  "name": "noProxy",
+                  "type": "string",
+                  "description": "Opt out of proxying HTTP/HTTPS requests.",
+                  "default": ""
+                },
+                {
+                  "name": "verbose",
+                  "type": "string",
+                  "description": "Log the commands that are executed during `git-clone`'s operation.",
+                  "default": "true"
+                },
+                {
+                  "name": "gitInitImage",
+                  "type": "string",
+                  "description": "The image providing the git-init binary that this Task runs.",
+                  "default": "gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.40.2"
+                },
+                {
+                  "name": "userHome",
+                  "type": "string",
+                  "description": "Absolute path to the user's home directory.\n",
+                  "default": "/home/git"
+                }
+              ],
+              "description": "These Tasks are Git tasks to work with repositories used by other tasks in your Pipeline.\nThe git-clone Task will clone a repo from the provided url into the output Workspace. By default the repo will be cloned into the root of your Workspace. You can clone into a subdirectory by setting this Task's subdirectory param. This Task also supports sparse checkouts. To perform a sparse checkout, pass a list of comma separated directory patterns to this Task's sparseCheckoutDirectories param.",
+              "steps": [
+                {
+                  "name": "clone",
+                  "image": "gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.40.2",
+                  "env": [
+                    {
+                      "name": "HOME",
+                      "value": "/home/git"
+                    },
+                    {
+                      "name": "PARAM_URL",
+                      "value": "https://github.com/WLun001/cncf-demo"
+                    },
+                    {
+                      "name": "PARAM_REVISION",
+                      "value": "HEAD"
+                    },
+                    {
+                      "name": "PARAM_REFSPEC"
+                    },
+                    {
+                      "name": "PARAM_SUBMODULES",
+                      "value": "true"
+                    },
+                    {
+                      "name": "PARAM_DEPTH",
+                      "value": "1"
+                    },
+                    {
+                      "name": "PARAM_SSL_VERIFY",
+                      "value": "true"
+                    },
+                    {
+                      "name": "PARAM_CRT_FILENAME",
+                      "value": "ca-bundle.crt"
+                    },
+                    {
+                      "name": "PARAM_SUBDIRECTORY"
+                    },
+                    {
+                      "name": "PARAM_DELETE_EXISTING",
+                      "value": "true"
+                    },
+                    {
+                      "name": "PARAM_HTTP_PROXY"
+                    },
+                    {
+                      "name": "PARAM_HTTPS_PROXY"
+                    },
+                    {
+                      "name": "PARAM_NO_PROXY"
+                    },
+                    {
+                      "name": "PARAM_VERBOSE",
+                      "value": "true"
+                    },
+                    {
+                      "name": "PARAM_SPARSE_CHECKOUT_DIRECTORIES"
+                    },
+                    {
+                      "name": "PARAM_USER_HOME",
+                      "value": "/home/git"
+                    },
+                    {
+                      "name": "WORKSPACE_OUTPUT_PATH",
+                      "value": "/workspace/output"
+                    },
+                    {
+                      "name": "WORKSPACE_SSH_DIRECTORY_BOUND",
+                      "value": "false"
+                    },
+                    {
+                      "name": "WORKSPACE_SSH_DIRECTORY_PATH"
+                    },
+                    {
+                      "name": "WORKSPACE_BASIC_AUTH_DIRECTORY_BOUND",
+                      "value": "false"
+                    },
+                    {
+                      "name": "WORKSPACE_BASIC_AUTH_DIRECTORY_PATH"
+                    },
+                    {
+                      "name": "WORKSPACE_SSL_CA_DIRECTORY_BOUND",
+                      "value": "false"
+                    },
+                    {
+                      "name": "WORKSPACE_SSL_CA_DIRECTORY_PATH"
+                    }
+                  ],
+                  "resources": {},
+                  "securityContext": {
+                    "runAsUser": 65532,
+                    "runAsNonRoot": true
+                  },
+                  "script": "#!/usr/bin/env sh\nset -eu\n\nif [ \"${PARAM_VERBOSE}\" = \"true\" ] ; then\n  set -x\nfi\n\nif [ \"${WORKSPACE_BASIC_AUTH_DIRECTORY_BOUND}\" = \"true\" ] ; then\n  cp \"${WORKSPACE_BASIC_AUTH_DIRECTORY_PATH}/.git-credentials\" \"${PARAM_USER_HOME}/.git-credentials\"\n  cp \"${WORKSPACE_BASIC_AUTH_DIRECTORY_PATH}/.gitconfig\" \"${PARAM_USER_HOME}/.gitconfig\"\n  chmod 400 \"${PARAM_USER_HOME}/.git-credentials\"\n  chmod 400 \"${PARAM_USER_HOME}/.gitconfig\"\nfi\n\nif [ \"${WORKSPACE_SSH_DIRECTORY_BOUND}\" = \"true\" ] ; then\n  cp -R \"${WORKSPACE_SSH_DIRECTORY_PATH}\" \"${PARAM_USER_HOME}\"/.ssh\n  chmod 700 \"${PARAM_USER_HOME}\"/.ssh\n  chmod -R 400 \"${PARAM_USER_HOME}\"/.ssh/*\nfi\n\nif [ \"${WORKSPACE_SSL_CA_DIRECTORY_BOUND}\" = \"true\" ] ; then\n   export GIT_SSL_CAPATH=\"${WORKSPACE_SSL_CA_DIRECTORY_PATH}\"\n   if [ \"${PARAM_CRT_FILENAME}\" != \"\" ] ; then\n      export GIT_SSL_CAINFO=\"${WORKSPACE_SSL_CA_DIRECTORY_PATH}/${PARAM_CRT_FILENAME}\"\n   fi\nfi\nCHECKOUT_DIR=\"${WORKSPACE_OUTPUT_PATH}/${PARAM_SUBDIRECTORY}\"\n\ncleandir() {\n  # Delete any existing contents of the repo directory if it exists.\n  #\n  # We don't just \"rm -rf ${CHECKOUT_DIR}\" because ${CHECKOUT_DIR} might be \"/\"\n  # or the root of a mounted volume.\n  if [ -d \"${CHECKOUT_DIR}\" ] ; then\n    # Delete non-hidden files and directories\n    rm -rf \"${CHECKOUT_DIR:?}\"/*\n    # Delete files and directories starting with . but excluding ..\n    rm -rf \"${CHECKOUT_DIR}\"/.[!.]*\n    # Delete files and directories starting with .. plus any other character\n    rm -rf \"${CHECKOUT_DIR}\"/..?*\n  fi\n}\n\nif [ \"${PARAM_DELETE_EXISTING}\" = \"true\" ] ; then\n  cleandir\nfi\n\ntest -z \"${PARAM_HTTP_PROXY}\" || export HTTP_PROXY=\"${PARAM_HTTP_PROXY}\"\ntest -z \"${PARAM_HTTPS_PROXY}\" || export HTTPS_PROXY=\"${PARAM_HTTPS_PROXY}\"\ntest -z \"${PARAM_NO_PROXY}\" || export NO_PROXY=\"${PARAM_NO_PROXY}\"\n\ngit config --global --add safe.directory \"${WORKSPACE_OUTPUT_PATH}\"\n/ko-app/git-init \\\n  -url=\"${PARAM_URL}\" \\\n  -revision=\"${PARAM_REVISION}\" \\\n  -refspec=\"${PARAM_REFSPEC}\" \\\n  -path=\"${CHECKOUT_DIR}\" \\\n  -sslVerify=\"${PARAM_SSL_VERIFY}\" \\\n  -submodules=\"${PARAM_SUBMODULES}\" \\\n  -depth=\"${PARAM_DEPTH}\" \\\n  -sparseCheckoutDirectories=\"${PARAM_SPARSE_CHECKOUT_DIRECTORIES}\"\ncd \"${CHECKOUT_DIR}\"\nRESULT_SHA=\"$(git rev-parse HEAD)\"\nEXIT_CODE=\"$?\"\nif [ \"${EXIT_CODE}\" != 0 ] ; then\n  exit \"${EXIT_CODE}\"\nfi\nprintf \"%s\" \"${RESULT_SHA}\" \u003e \"/tekton/results/commit\"\nprintf \"%s\" \"${PARAM_URL}\" \u003e \"/tekton/results/url\"\n"
+                }
+              ],
+              "workspaces": [
+                {
+                  "name": "output",
+                  "description": "The git repo will be cloned onto the volume backing this Workspace."
+                },
+                {
+                  "name": "ssh-directory",
+                  "description": "A .ssh directory with private key, known_hosts, config, etc. Copied to\nthe user's home before git commands are executed. Used to authenticate\nwith the git remote when performing the clone. Binding a Secret to this\nWorkspace is strongly recommended over other volume types.\n",
+                  "optional": true
+                },
+                {
+                  "name": "basic-auth",
+                  "description": "A Workspace containing a .gitconfig and .git-credentials file. These\nwill be copied to the user's home before any git commands are run. Any\nother files in this Workspace are ignored. It is strongly recommended\nto use ssh-directory over basic-auth whenever possible and to bind a\nSecret to this Workspace over other volume types.\n",
+                  "optional": true
+                },
+                {
+                  "name": "ssl-ca-directory",
+                  "description": "A workspace containing CA certificates, this will be used by Git to\nverify the peer with when fetching or pushing over HTTPS.\n",
+                  "optional": true
+                }
+              ],
+              "results": [
+                {
+                  "name": "commit",
+                  "type": "string",
+                  "description": "The precise commit SHA that was fetched by this Task."
+                },
+                {
+                  "name": "url",
+                  "type": "string",
+                  "description": "The precise URL that was fetched by this Task."
+                }
+              ]
+            }
+          }
+        },
+        "hello-kaniko-pipeline-run-kxzpf-send-to-telegram": {
+          "pipelineTaskName": "send-to-telegram",
+          "status": {
+            "podName": ""
+          }
+        }
+      },
+      "pipelineSpec": {
+        "tasks": [
+          {
+            "name": "fetch-from-git",
+            "taskRef": {
+              "name": "git-clone",
+              "kind": "Task"
+            },
+            "params": [
+              {
+                "name": "url",
+                "value": "https://github.com/WLun001/cncf-demo"
+              },
+              {
+                "name": "revision",
+                "value": "HEAD"
+              }
+            ],
+            "workspaces": [
+              {
+                "name": "output",
+                "workspace": "git-source"
+              }
+            ]
+          },
+          {
+            "name": "build-image",
+            "taskRef": {
+              "name": "kaniko",
+              "kind": "Task"
+            },
+            "runAfter": [
+              "fetch-from-git"
+            ],
+            "params": [
+              {
+                "name": "IMAGE",
+                "value": "ghcr.io/wlun001/hello-world"
+              },
+              {
+                "name": "CONTEXT",
+                "value": "examples/hello-world"
+              },
+              {
+                "name": "DOCKERFILE",
+                "value": "$(workspaces.source.path)/examples/hello-world/Dockerfile"
+              },
+              {
+                "name": "EXTRA_ARGS",
+                "value": [
+                  "--no-push"
+                ]
+              }
+            ],
+            "workspaces": [
+              {
+                "name": "source",
+                "workspace": "git-source"
+              }
+            ]
+          }
+        ],
+        "params": [
+          {
+            "name": "git_revision",
+            "type": "string"
+          }
+        ],
+        "workspaces": [
+          {
+            "name": "git-source"
+          }
+        ],
+        "finally": [
+          {
+            "name": "send-to-telegram",
+            "taskRef": {
+              "name": "send-to-telegram",
+              "kind": "Task"
+            },
+            "params": [
+              {
+                "name": "bot-token-secret",
+                "value": "telegram-bot-secret"
+              },
+              {
+                "name": "message",
+                "value": "hello-kaniko-pipeline: $(tasks.status)"
+              },
+              {
+                "name": "chat-id",
+                "value": "5884662812"
+              }
+            ]
+          }
+        ]
+      },
+      "finallyStartTime": "2022-12-20T13:09:53Z"
+    }
+  }
+}
